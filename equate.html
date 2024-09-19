@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogDogIt E-85 Equivulator</title>
+</head>
+<body><h1>Reg. vs E-85 Price Equivulator</h1>
+<p>Enter your MPG for each type of fuel and a known price for either one to find the break-even point for the other:</p>
+    <form id="Equater">
+<hr />
+        Reg. MPG: <input type="number" name="mpgR" id="mpgR" placeholder="MPG Reg." value="16" step=".01">
+        Reg. Price: <input type="number" name="ppgR" id="ppgR" placeholder="Reg. Price Per Gal." step=".01"></br>
+<hr />
+        E-85 MPG: <input type="number" name="mpgE" id="mpgE" placeholder="MPG E-85" value="13" step=".01">
+        E-85 Price: <input type="number" name="ppgE" id="ppgE" placeholder="E-85 Price Per Gal." step=".01"></br>
+<hr />
+        <button type="submit">Equate</button></br>
+<a href="equate.html">RESET</a>
+    </form>
+    
+<script>
+const form = document.getElementById('Equater');                    
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const formData = {};
+    new FormData(form).forEach((value, key) => {
+        formData[key] = value;
+    });
+
+if ((formData.ppgE != "") && (formData.ppgR != "")){
+alert("Enter Only ONE Price!");
+}
+if ((formData.ppgE == "") && (formData.ppgR == "")){
+alert("Enter A Price!");
+return;
+}
+if (formData.ppgE == ""){ 
+var ppmR 
+var ppgE
+var ppgRv = formData.ppgR;
+var mpgRv = formData.mpgR;
+var mpgEv = formData.mpgE;
+ppmR = ppgRv/mpgRv;
+ppgE = (ppmR * mpgEv).toFixed(2);
+alert("E-85 Break-Even Price: $" + ppgE);
+}
+if (formData.ppgR == ""){ 
+var ppmE 
+var ppgR
+var ppgEv = formData.ppgE;
+var mpgEv = formData.mpgE;
+var mpgRv = formData.mpgR;
+ppmE = ppgEv/mpgEv;
+ppgR = (ppmE * mpgRv).toFixed(2);
+alert("Regular Break-Even Price: $" + ppgR);
+} 
+});
+</script>
+</body>
+</html>
